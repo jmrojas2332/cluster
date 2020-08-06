@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   mcs1:
     build: .
@@ -8,6 +9,7 @@ services:
     links:
       - "mcs2"
       - "mcs3"
+
   mcs2:
     build: .
     image: mcs2_image
@@ -15,6 +17,7 @@ services:
     container_name: mcs2_container
     links:
       - "mcs3"
+
   mcs3:
     build: .
     image: mcs3_image

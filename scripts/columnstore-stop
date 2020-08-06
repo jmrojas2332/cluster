@@ -11,7 +11,7 @@ echo Stopping...
 /usr/share/mysql/mysql.server stop
 
 if [[ ! -z $CMAPI_PID ]]; then
-    kill $CMAPI_PID > /dev/null
+    kill -9 $CMAPI_PID > /dev/null
 fi
 
 if  [[ ! -z $(pidof $PROGS) ]]; then
