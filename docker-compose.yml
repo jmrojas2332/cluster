@@ -2,10 +2,21 @@ version: '3'
 services:
   mcs1:
     build: .
+    image: mcs1_image
     hostname: mcs1
+    container_name: mcs1_container
+    links:
+      - "mcs2"
+      - "mcs3"
   mcs2:
     build: .
+    image: mcs2_image
     hostname: mcs2
+    container_name: mcs2_container
+    links:
+      - "mcs3"
   mcs3:
     build: .
+    image: mcs3_image
     hostname: mcs3
+    container_name: mcs3_container
