@@ -109,4 +109,4 @@ RUN dnf clean all && \
 
 # Bootstrap
 ENTRYPOINT ["/usr/bin/tini","--","docker-entrypoint.sh"]
-CMD columnstore-start && monit -I
+CMD cmapi-start && monit -I

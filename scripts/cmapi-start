@@ -1,7 +1,13 @@
 #!/bin/bash 
 
+IFLAG=/etc/columnstore/container-initialized
 LOG_PREFIX=/var/log/mariadb/columnstore
 MCS_INSTALL_BIN=/usr/bin
+
+# Intialize Container If Necessary
+if [ ! -e $IFLAG ]; then
+  $MCS_INSTALL_BIN/columnstore-init &> $LOG_PREFIX/columnstore-init.log
+fi
 
 echo Starting...
 
