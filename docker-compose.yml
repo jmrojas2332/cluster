@@ -2,7 +2,10 @@ version: '3'
 services:
   mcs1:
     build: .
+    hostname: mcs1
   mcs2:
     build: .
+    hostname: mcs2
   mcs3:
     build: .
+    hostname: mcs3
