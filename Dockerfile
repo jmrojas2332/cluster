@@ -46,7 +46,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 
 # Add CMAPI Package
 RUN mkdir -p /opt/cmapi
-ADD https://cspkg.s3.amazonaws.com/cmapi/pr/156/mariadb-columnstore-cmapi.tar.gz /opt/cmapi
+ADD https://cspkg.s3.amazonaws.com/cmapi/mariadb-columnstore-cmapi.tar.gz /opt/cmapi
 WORKDIR /opt/cmapi
 RUN tar -xvzf mariadb-columnstore-cmapi.tar.gz && rm -f mariadb-columnstore-cmapi.tar.gz && rm -rf /opt/cmapi/service*
 WORKDIR /
