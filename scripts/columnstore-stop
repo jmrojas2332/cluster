@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Set Variables
-CMAPI_PID=$(pgrep -f cmapi_server)
 PROGS='StorageManager workernode controllernode PrimProc ExeMgr DMLProc DDLProc WriteEngineServer'
 MCS_INSTALL_BIN=/usr/bin
 
@@ -9,10 +8,6 @@ MCS_INSTALL_BIN=/usr/bin
 echo Stopping...
 
 /usr/share/mysql/mysql.server stop
-
-if [[ ! -z $CMAPI_PID ]]; then
-    kill $CMAPI_PID > /dev/null
-fi
 
 if  [[ ! -z $(pidof $PROGS) ]]; then
    $MCS_INSTALL_BIN/save_brm

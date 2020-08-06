@@ -22,10 +22,7 @@ RUN dnf -y install bind-utils \
     perl \
     perl-DBI \
     python3 \
-    python3-cherrypy \
     python3-requests \
-    python3-lxml \
-    python3-routes \
     rsyslog \
     snappy \
     sudo \
@@ -49,9 +46,9 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 
 # Add CMAPI Package
 RUN mkdir -p /opt/cmapi
-ADD https://cspkg.s3.amazonaws.com/cmapi/pr/154/mariadb-columnstore-cmapi.tar.gz /opt/cmapi
+ADD https://cspkg.s3.amazonaws.com/cmapi/pr/156/mariadb-columnstore-cmapi.tar.gz /opt/cmapi
 WORKDIR /opt/cmapi
-RUN tar -xvzf mariadb-columnstore-cmapi.tar.gz && rm -f mariadb-columnstore-cmapi.tar.gz && rm -rf /opt/cmapi/python
+RUN tar -xvzf mariadb-columnstore-cmapi.tar.gz && rm -f mariadb-columnstore-cmapi.tar.gz && rm -rf /opt/cmapi/service*
 WORKDIR /
 
 # Install MariaDB/ColumnStore packages
@@ -70,14 +67,20 @@ COPY config/cmapi_server.conf /etc/columnstore/cmapi_server.conf
 COPY scripts/columnstore-init \
      scripts/columnstore-start \
      scripts/columnstore-stop \
-     scripts/columnstore-restart /usr/bin/
+     scripts/columnstore-restart \
+     scripts/cmapi-start \
+     scripts/cmapi-stop \
+     scripts/cmapi-restart /usr/bin/
 
 # Chmod some files
 RUN chmod +x /usr/bin/tini \
     /usr/bin/columnstore-init \
     /usr/bin/columnstore-start \
     /usr/bin/columnstore-stop \
-    /usr/bin/columnstore-restart && \
+    /usr/bin/columnstore-restart \
+    /usr/bin/cmapi-start \
+    /usr/bin/cmapi-stop \
+    /usr/bin/cmapi-restart && \
     sed -i 's|set daemon\s.30|set daemon 5|g' /etc/monitrc && \
     sed -i 's|#.*with start delay\s.*240|  with start delay 60|g' /etc/monitrc
 

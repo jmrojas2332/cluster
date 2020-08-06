@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Set Variables
+CMAPI_PID=$(pgrep -f cmapi_server)
+
+# Stop System
+echo Stopping...
+columnstore-stop
+
+if [[ ! -z $CMAPI_PID ]]; then
+  kill $CMAPI_PID > /dev/null
+fi
