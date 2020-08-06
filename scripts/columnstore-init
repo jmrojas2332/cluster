@@ -162,11 +162,6 @@ fi
 echo Clearing shared memory
 $MCS_INSTALL_BIN/clearShm
 
-# strartup cmapi
-touch $LOG_PREFIX/cmapi_server.log && chmod 666 $LOG_PREFIX/cmapi_server.log
-PYTHONPATH=/opt/cmapi/deps /opt/cmapi/python/bin/python3 -m /opt/cmapi/cmapi_server &> $LOG_PREFIX/cmapi_server.log &
-echo CMAPI PID = $!
-
 # Mark Container Initialized
 touch $IFLAG
 
